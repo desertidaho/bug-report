@@ -84,6 +84,13 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    deleteNote({ commit, dispatch }, noteId) {
+      let postId = this.state.activeLog._id
+      _sandbox.delete(`${postId}/notes/${noteId}`)
+        .then(res => {
+          this.dispatch('getAllNotes')
+        })
     }
 
 

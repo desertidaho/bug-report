@@ -2,14 +2,14 @@
   <div class="Buglog">
     <div class="row">
       <div class="col-10 offset-1 mt-3">
-        <table class="table table-hover table-bordered shadow-lg">
+        <table class="table table-hover table-bordered shadow-lg text-center">
           <thead class="thead-dark">
             <tr>
-              <th>Created By</th>
-              <th>Title</th>
-              <th>When Created</th>
-              <th>Status</th>
-              <th>When Closed</th>
+              <th id="creator">Created By</th>
+              <th id="title">Title</th>
+              <th id="created">When Created</th>
+              <th id="status">Status</th>
+              <th id="closed">When Closed</th>
             </tr>
           </thead>
           <tbody v-for="log in allLogs" :key="log.id" :class="log.closed ? 'table-secondary' :'table-success'">
@@ -56,8 +56,30 @@
   };
 </script>
 
-<style>
+<style scoped>
   table {
-    width: 100%;
+    table-layout: fixed;
+    white-space: normal !important;
+  }
+
+  td {
+    word-wrap: break-word;
+  }
+
+  #creator {
+    width: 14vw;
+  }
+
+  #title {
+    width: 25vw;
+  }
+
+  #status {
+    width: 10vw;
+  }
+
+  #created,
+  #closed {
+    width: 17vw;
   }
 </style>

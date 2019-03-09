@@ -5,16 +5,16 @@
     </div>
     <div class="row my-5">
       <div class="col-10 offset-1">
-        <table class="table table-hover table-bordered shadow">
+        <table class="table table-hover table-bordered shadow text-center">
           <thead class="thead-dark">
             <tr>
-              <th>Created By</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Date Created</th>
-              <th>Last Activity</th>
-              <th># of Notes</th>
-              <th>Status</th>
+              <th id="created">Created By</th>
+              <th id="title">Title</th>
+              <th id="description">Description</th>
+              <th id="date-created">Date Created</th>
+              <th id="last-activity">Last Activity</th>
+              <th id="notes">Notes</th>
+              <th id="status">Status</th>
             </tr>
           </thead>
           <tbody :class="log.closed ? 'table-secondary' :'table-success'">
@@ -42,12 +42,13 @@
               placeholder=" *Name...">
             <input required v-model="newNote.content" type="text" class="form-control ml-2 description shadow" id
               placeholder=" *Description...">
-            <button type="submit" class="btn btn-outline-dark shadow ml-2">Submit</button>
+            <button type="submit" class="btn btn-outline-dark shadow ml-2"> Submit </button>
           </div>
         </form>
       </div>
     </div>
     <notes class="row"></notes>
+    <a name="bottom"></a>
   </div>
 </template>
 
@@ -93,6 +94,9 @@
       },
       close() {
         this.$store.dispatch('close', this.$store.state.activeLog._id)
+      },
+      bottom() {
+
       }
 
     },
@@ -112,5 +116,39 @@
 <style scoped>
   .close-btn {
     font-size: 0.7rem;
+  }
+
+  table {
+    table-layout: fixed;
+    white-space: normal !important;
+  }
+
+  td {
+    word-wrap: break-word;
+  }
+
+  #created {
+    width: 10vw;
+  }
+
+  #description {
+    width: 20vw;
+  }
+
+  #notes {
+    width: 5vw;
+  }
+
+  #date-created,
+  #last-activity {
+    width: 13vw;
+  }
+
+  #status {
+    width: 9vw;
+  }
+
+  input {
+    border: 1px solid rgb(44, 44, 44);
   }
 </style>
