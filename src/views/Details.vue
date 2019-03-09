@@ -17,7 +17,7 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tbody :class="log.closed ? 'table-danger' :'table-success'">
+          <tbody :class="log.closed ? 'table-warning' :'table-success'">
             <tr>
               <td>{{log.creator}}</td>
               <td>{{log.title}}</td>

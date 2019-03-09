@@ -12,7 +12,7 @@
               <th>When Closed</th>
             </tr>
           </thead>
-          <tbody v-for="log in allLogs" :key="log.id" :class="log.closed ? 'table-danger' :'table-success'">
+          <tbody v-for="log in allLogs" :key="log.id" :class="log.closed ? 'table-warning' :'table-success'">
             <tr @click="setActive(log); $router.push({name: 'bugDetails', params:{id: log._id}})">
               <td>{{log.creator}}</td>
               <td>{{log.title}}</td>
