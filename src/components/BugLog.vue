@@ -1,10 +1,7 @@
 <template>
-  <div class="details container-fluid">
+  <div class="Buglog">
     <div class="row">
-      <h1 class="title mt-4 col-12 text-center">Buggy Details</h1>
-    </div>
-    <div class="row my-5">
-      <div class="col-10 offset-1">
+      <div class="col-10 offset-1 mt-5">
         <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
@@ -15,8 +12,8 @@
               <th>Last Activity</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
+          <tbody v-for="log in allLogs" :key="log.id">
+            <tr @click="setActive(log); $router.push({name: 'bugDetails', params:{id: log._id}})">
               <td>{{log.title}}</td>
               <td>{{log.creator}}</td>
               <td>{{log.closed ? 'Closed' : 'Active'}}</td>
@@ -32,18 +29,27 @@
 
 <script>
 export default {
-  name: "bugDetails",
-  mounted() {},
+  name: "BugLog",
   props: [],
   data() {
     return {};
   },
   computed: {
-    log() {
-      return this.$store.state.activeLog;
+    allLogs() {
+      return this.$store.state.logs;
     }
   },
-  methods: {},
+  methods: {
+    setActive(log) {
+      this.$store.dispatch("setActive", log);
+    }
+  },
   components: {}
 };
 </script>
+
+<style>
+table {
+  width: 100%;
+}
+</style>
