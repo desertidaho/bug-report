@@ -1,7 +1,11 @@
 <template>
   <div class="Buglog">
     <div class="row">
-      <div class="col-10 offset-1 mt-3">
+      <div class="col-1 mt-3 d-flex flex-column justify-content-center px-0">
+        <button class="btn btn-sm btn-outline-dark shadow mx-3" @click="sortStatus">Sort Status</button>
+        <button class="btn btn-sm btn-outline-dark shadow mx-3 mt-4" @click="sortDate">Sort Date</button>
+      </div>
+      <div class="col-10 mt-3 px-0">
         <table class="table table-hover table-bordered shadow-lg text-center">
           <thead class="thead-dark">
             <tr>
@@ -44,6 +48,13 @@
     methods: {
       setActive(log) {
         this.$store.dispatch("setActive", log);
+      },
+      sortStatus() {
+        let logs = this.$store.state.logs
+        logs.sort((a, b) => a.closed - b.closed)
+      },
+      sortDate() {
+        return this.$store.dispatch('getAllLogs');
       }
     },
     components: {},

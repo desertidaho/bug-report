@@ -55,7 +55,7 @@
   }
 
   h6 {
-    line-height: 2rem;
+    margin-bottom: 1.1rem;
   }
 
   .delete-btn {

@@ -51,7 +51,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .name {
     width: 15vw !important;
   }
@@ -62,5 +62,9 @@
 
   .description {
     width: 40vw !important;
+  }
+
+  input {
+    border: 1px solid rgb(44, 44, 44);
   }
 </style>

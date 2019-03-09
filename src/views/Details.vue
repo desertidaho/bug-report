@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 mt-4" v-show="!log.closed">
+      <div class="col-10 offset-1 mt-4" v-show="!log.closed">
         <h5 class="text-center mt-3">Creat a note for this bug</h5>
         <form @submit.prevent="addNote" class="mb-5">
           <div class="form-goup my-4 col-12 d-flex justify-content-center">
@@ -59,8 +59,11 @@
   export default {
     name: "bugDetails",
     mounted() {
+      if (this.$store.state.logs.length == 0) {
+        this.$store.dispatch('getAllLogs')
+      }
       this.$store.state.activeLog;
-      this.$store.dispatch("getAllNotes");
+      this.$store.dispatch('getAllNotes');
     },
     props: [],
     data() {
@@ -74,19 +77,20 @@
       };
     },
     computed: {
-      log() {
+      activeLog() {
         return this.$store.state.activeLog;
       },
       allNotes() {
         return this.$store.state.allNotes;
+      },
+      log() {
+        if (!this.$store.state.activeLog._id) {
+          let active = this.$route.params.id
+          return this.$store.state.logs.find(i => i._id == active);
+        } else {
+          return this.$store.state.activeLog;
+        }
       }
-      // logger() {
-      //   if (!this.$store.state.activeLog._id) {
-      //     return this.$store.state.logs.find(l => {
-      //       return l._id == this.$route.params.id;
-      //     });
-      //   }
-      // }
     },
     methods: {
       addNote() {
@@ -98,7 +102,6 @@
       bottom() {
 
       }
-
     },
     components: {
       Notes
@@ -150,5 +153,9 @@
 
   input {
     border: 1px solid rgb(44, 44, 44);
+  }
+
+  .name {
+    width: 25vw;
   }
 </style>
