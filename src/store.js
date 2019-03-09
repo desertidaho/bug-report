@@ -74,6 +74,16 @@ export default new Vuex.Store({
         .then(res => {
           commit('addNote', res.data.results)
         })
+    },
+    //close a bug report
+    close({ commit, dispatch }, id) {
+      _sandbox.delete(`${id}`)
+        .then(res => {
+          commit('setActiveLog', res.data.results)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
 

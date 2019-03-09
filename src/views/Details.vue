@@ -23,20 +23,15 @@
               <td>{{log.description}}</td>
               <td>{{log.createdAt | formatTime}}</td>
               <td>{{log.updatedAt | formatTime}}</td>
-              <td>
-                <select class="">
-                  <option class="px-2 py-1" value="Active">Active</option>
-                  <option class="px-2 py-1" value="Closed">Closed</option>
-                </select>
-              </td>
-              <!-- <td>{{log.closed ? 'Closed' : 'Active'}}</td> -->
+              <td>{{log.closed ? 'Closed' : 'Active / '}} <button @click="close" v-show="!log.closed"
+                  class="btn btn-sm btn-danger close-btn px-1 py-0 shadow-lg" value="Closed">Close</button></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
     <div class="row">
-      <div class="col-12 mt-4">
+      <div class="col-12 mt-4" v-show="!log.closed">
         <h5 class="text-center mt-3">Creat a note for this bug</h5>
         <form @submit.prevent="addNote" class="mb-5">
           <div class="form-goup my-4 col-12 d-flex justify-content-center">
@@ -88,8 +83,12 @@
     },
     methods: {
       addNote() {
-        this.$store.dispatch("newNote", this.newNote);
+        this.$store.dispatch('newNote', this.newNote);
+      },
+      close() {
+        this.$store.dispatch('close', this.$store.state.activeLog._id)
       }
+
     },
     components: {
       Notes
@@ -105,5 +104,7 @@
 </script>
 
 <style scoped>
-
+  .close-btn {
+    font-size: 0.7rem;
+  }
 </style>
