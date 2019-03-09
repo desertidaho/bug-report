@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="Notes col-10 offset-1" v-for="note in allNotes" :key="note">
-      <div class="card mb-3">
-        <div class="card-body">
+    <div class="Notes col-6 offset-3" v-for="note in allNotes" :key="note">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body bg-warning">
           <h5 class="card-title">Created by {{note.creator}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{note.content}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">{{note.createdAt}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">{{note.updatedAt}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">{{note.flagged}}</h6>
+          <h6 class="card-subtitle mb-2">Note comments: {{note.content}}</h6>
+          <h6 class="card-subtitle mb-2">Note created: {{note.createdAt | formatTime}}</h6>
+          <h6 class="card-subtitle mb-2">Last activity: {{note.updatedAt | formatTime}}</h6>
+          <h6 class="card-subtitle mb-2">Status: {{note.flagged}}</h6>
           <a href="#" class="card-link">Delete</a>
           <a href="#" class="card-link">Please work</a>
         </div>
@@ -20,19 +20,27 @@
 </template>
 
 <script>
-export default {
-  name: "Notes",
-  mounted() {},
-  props: [],
-  data() {
-    return {};
-  },
-  computed: {
-    allNotes() {
-      return this.$store.state.allNotes;
+  import Moment from 'moment'
+
+  export default {
+    name: "Notes",
+    mounted() { },
+    props: [],
+    data() {
+      return {};
+    },
+    computed: {
+      allNotes() {
+        return this.$store.state.allNotes;
+      }
+    },
+    methods: {},
+    components: {},
+    filters: {
+      formatTime(date) {
+        return Moment(String(date)).format('DD/MM/YYYY, HH:MM')
+      }
     }
-  },
-  methods: {},
-  components: {}
-};
+
+  };
 </script>
