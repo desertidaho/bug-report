@@ -5,7 +5,7 @@
     </div>
     <div class="row my-5">
       <div class="col-10 offset-1">
-        <table class="table table-hover shadow">
+        <table class="table table-hover table-bordered shadow">
           <thead class="thead-dark">
             <tr>
               <th>Created By</th>
@@ -17,7 +17,7 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tbody :class="log.closed ? 'table-warning' :'table-success'">
+          <tbody :class="log.closed ? 'table-secondary' :'table-success'">
             <tr>
               <td>{{log.creator}}</td>
               <td>{{log.title}}</td>
