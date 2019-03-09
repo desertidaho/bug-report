@@ -7,9 +7,9 @@
             <tr>
               <th>Created By</th>
               <th>Title</th>
-              <th>Date Created</th>
-              <th>Last Activity</th>
+              <th>When Created</th>
               <th>Status</th>
+              <th>When Closed</th>
             </tr>
           </thead>
           <tbody v-for="log in allLogs" :key="log.id" :class="log.closed ? 'table-danger' :'table-success'">
@@ -17,8 +17,8 @@
               <td>{{log.creator}}</td>
               <td>{{log.title}}</td>
               <td>{{log.createdAt | formatTime}}</td>
-              <td>{{log.updatedAt | formatTime}}</td>
               <td>{{log.closed ? 'Closed' : 'Active'}}</td>
+              <td><span v-if="log.closed">{{log.updatedAt | formatTime}}</span></td>
             </tr>
           </tbody>
         </table>
@@ -49,7 +49,7 @@
     components: {},
     filters: {
       formatTime(date) {
-        return Moment(String(date)).format('DD/MM/YYYY, HH:MM')
+        return Moment(String(date)).format('MM/DD/YYYY, LT')
       }
     }
 

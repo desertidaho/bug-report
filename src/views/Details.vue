@@ -13,6 +13,7 @@
               <th>Description</th>
               <th>Date Created</th>
               <th>Last Activity</th>
+              <th># of Notes</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -22,9 +23,11 @@
               <td>{{log.title}}</td>
               <td>{{log.description}}</td>
               <td>{{log.createdAt | formatTime}}</td>
-              <td>{{log.updatedAt | formatTime}}</td>
+              <td v-if="allNotes.length != 0">{{allNotes[allNotes.length - 1].updatedAt | formatTime}}</td>
+              <td v-else="">{{log.updatedAt | formatTime}}</td>
+              <td>{{allNotes.length}}</td>
               <td>{{log.closed ? 'Closed' : 'Active / '}} <button @click="close" v-show="!log.closed"
-                  class="btn btn-sm btn-danger close-btn px-1 py-0 shadow-lg" value="Closed">Close</button></td>
+                  class="btn btn-sm btn-danger close-btn px-1 py-0 shadow-lg mb-1" value="Closed">Close</button></td>
             </tr>
           </tbody>
         </table>
@@ -72,6 +75,9 @@
     computed: {
       log() {
         return this.$store.state.activeLog;
+      },
+      allNotes() {
+        return this.$store.state.allNotes;
       }
       // logger() {
       //   if (!this.$store.state.activeLog._id) {
@@ -95,7 +101,7 @@
     },
     filters: {
       formatTime(date) {
-        return Moment(String(date)).format('DD/MM/YYYY, HH:MM')
+        return Moment(String(date)).format('MM/DD/YYYY, LT')
       }
     }
 

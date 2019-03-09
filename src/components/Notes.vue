@@ -38,7 +38,7 @@
     components: {},
     filters: {
       formatTime(date) {
-        return Moment(String(date)).format('DD/MM/YYYY, HH:MM')
+        return Moment(String(date)).format('MM/DD/YYYY, LT')
       }
     }
 
