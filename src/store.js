@@ -11,7 +11,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     logs: [],
-    activeLog: {}
+    activeLog: {},
+    allNotes: []
 
   },
   mutations: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     setActiveLog(state, log) {
       state.activeLog = log
     },
+    addNote(state, data) {
+      state.allNotes = data
+    }
 
   },
   actions: {
@@ -57,6 +61,20 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    newNote({ commit, dispatch }, payload) {
+      let id = this.state.activeLog._id
+      _sandbox.post(`${id}/notes`, payload)
+        .then(res => {
+          this.dispatch('getAllNotes')
+        })
+    },
+    getAllNotes({ commit, dispatch }) {
+      let id = this.state.activeLog._id
+      _sandbox.get(`${id}/notes`)
+        .then(res => {
+          commit('addNote', res.data.results)
+        })
+    }
 
 
   }

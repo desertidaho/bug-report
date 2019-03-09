@@ -23,7 +23,6 @@
 </template>
 
 <script>
-  // @ is an alias to /src
   import BugLog from '@/components/BugLog.vue'
 
   export default {
