@@ -82,12 +82,14 @@
         return this.$store.state.activeLog;
       },
       allNotes() {
+        this.$data.newNote.creator = ''
+        this.$data.newNote.content = ''
         return this.$store.state.allNotes;
       },
       log() {
         if (!this.$store.state.activeLog._id) {
           let id = this.$route.params.id
-          return this.$store.state.logs.find(i => i._id == id);
+          return this.$store.state.logs.find(log => log._id == id);
         } else {
           return this.$store.state.activeLog;
         }
@@ -96,7 +98,6 @@
     methods: {
       addNote() {
         this.$store.dispatch('newNote', this.newNote);
-        //this.$data.newNote.reset()
       },
       close() {
         this.$store.dispatch('close', this.$store.state.activeLog._id)
@@ -159,7 +160,7 @@
 
   input[type="text"].form-control::-webkit-input-placeholder {
     font-weight: 500;
-    color: rgb(66, 123, 247);
+    color: #ffc107;
   }
 
   input {

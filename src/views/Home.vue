@@ -47,7 +47,11 @@
     methods: {
       addLog() {
         this.$store.dispatch('addLog', this.newLog)
-        //this.form.reset()
+      },
+      clearLogInputFields() {
+        this.$data.newLog.creator = ''
+        this.$data.newLog.title = ''
+        this.$data.newLog.description = ''
       }
     }
   }

@@ -5,6 +5,7 @@
         <button class="btn btn-sm btn-outline-secondary shadow" @click="sortName">Sort Name</button>
         <button class="btn btn-sm btn-outline-secondary shadow ml-2" @click="sortStatus">Sort Status</button>
         <button class="btn btn-sm btn-outline-secondary shadow ml-2" @click="sortDate">Sort Date</button>
+        <h6 class="ml-3 mt-2">Total reports: {{allLogs.length}}</h6>
       </div>
     </div>
     <div class="row">
@@ -45,6 +46,7 @@
     },
     computed: {
       allLogs() {
+        this.$emit('clearLogInputFields')
         return this.$store.state.logs;
       }
     },

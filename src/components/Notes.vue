@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="Notes col-4 offset-4" v-for="note in allNotes" :key="note">
+    <div class="Notes col-4 offset-4" v-for="note in allNotes" :key="note.id">
       <div class="card mb-4 shadow">
         <div class="card-body"
           :class="note.flagged == 'pending' ? 'bg-warning' : note.flagged == 'completed' ? 'bg-success' : 'bg-secondary'">
@@ -41,6 +41,7 @@
       deleteNote(noteId) {
         this.$store.dispatch('deleteNote', noteId)
       },
+      //not working properly?? Sending correct payload. Server issue?
       changeStatus(payload) {
         this.$store.dispatch('editNote', payload)
       }
