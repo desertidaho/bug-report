@@ -9,10 +9,10 @@
         <table class="table table-hover table-bordered shadow text-center">
           <thead class="thead-dark">
             <tr>
-              <th id="created">Created By</th>
+              <th id="created">Name</th>
               <th id="title">Title</th>
               <th id="description">Description</th>
-              <th id="date-created">Date Created</th>
+              <th id="date-created">Created</th>
               <th id="last-activity">Last Activity</th>
               <th id="notes">Notes</th>
               <th id="status">Status</th>
@@ -70,8 +70,8 @@
     data() {
       return {
         newNote: {
-          creator: "",
-          content: "",
+          creator: '',
+          content: '',
           flagged: "pending"
         },
         flags: ["pending", "completed", "rejected"]
@@ -96,12 +96,10 @@
     methods: {
       addNote() {
         this.$store.dispatch('newNote', this.newNote);
+        this.$data.newNote.reset()
       },
       close() {
         this.$store.dispatch('close', this.$store.state.activeLog._id)
-      },
-      bottom() {
-
       }
     },
     components: {
@@ -118,6 +116,11 @@
 </script>
 
 <style scoped>
+  .title {
+    text-shadow: 0.3px 0.3px rgb(245, 142, 24);
+    font-family: 'Orbitron', sans-serif;
+  }
+
   img {
     width: 4vw;
     height: 9vh;
@@ -129,7 +132,6 @@
 
   table {
     table-layout: fixed;
-    white-space: normal !important;
   }
 
   td {

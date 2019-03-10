@@ -1,19 +1,22 @@
 <template>
   <div class="Buglog">
-    <div class="row">
-      <div class="col-1 mt-3 d-flex flex-column justify-content-center px-0">
-        <button class="btn btn-sm btn-outline-dark shadow mx-3" @click="sortStatus">Sort Status</button>
-        <button class="btn btn-sm btn-outline-dark shadow mx-3 mt-4" @click="sortDate">Sort Date</button>
+    <div class="row my-0">
+      <div class="col-10 offset-1 d-flex justify-content-center mb-1">
+        <button class="btn btn-sm btn-outline-secondary shadow" @click="sortName">Sort Name</button>
+        <button class="btn btn-sm btn-outline-secondary shadow ml-2" @click="sortStatus">Sort Status</button>
+        <button class="btn btn-sm btn-outline-secondary shadow ml-2" @click="sortDate">Sort Date</button>
       </div>
-      <div class="col-10 mt-2 px-0">
+    </div>
+    <div class="row">
+      <div class="col-10 offset-1 mt-2 px-0">
         <table class="table table-hover table-bordered shadow-lg text-center">
           <thead class="thead-dark">
             <tr>
-              <th id="creator">Created By</th>
+              <th id="creator">Name</th>
               <th id="title">Title</th>
-              <th id="created">When Created</th>
+              <th id="created">Created</th>
               <th id="status">Status</th>
-              <th id="closed">When Closed</th>
+              <th id="closed">Closed</th>
             </tr>
           </thead>
           <tbody v-for="log in allLogs" :key="log.id" :class="log.closed ? 'table-warning' :'table-primary'">
@@ -49,6 +52,10 @@
       setActive(log) {
         this.$store.dispatch("setActive", log);
       },
+      sortName() {
+        let logs = this.$store.state.logs
+        logs.sort((a, b) => a.creator.localeCompare(b.creator));
+      },
       sortStatus() {
         let logs = this.$store.state.logs
         logs.sort((a, b) => a.closed - b.closed)
@@ -70,7 +77,6 @@
 <style scoped>
   table {
     table-layout: fixed;
-    white-space: normal !important;
   }
 
   td {

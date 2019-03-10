@@ -11,7 +11,7 @@
           <div class="form-goup my-4 col-12 d-flex justify-content-center">
             <input required v-model="newLog.creator" type="text" class="form-control name shadow" id
               placeholder=" *Name...">
-            <input required v-model="newLog.title" type="text" class="form-control title ml-2 shadow" id
+            <input required v-model="newLog.title" type="text" class="form-control form-title ml-2 shadow" id
               placeholder=" *Title...">
             <input required v-model="newLog.description" type="text" class="form-control ml-2 description shadow" id
               placeholder=" *Description...">
@@ -47,12 +47,18 @@
     methods: {
       addLog() {
         this.$store.dispatch('addLog', this.newLog)
+        this.form.reset()
       }
     }
   }
 </script>
 
 <style scoped>
+  .title {
+    text-shadow: 0.3px 0.3px rgb(245, 142, 24);
+    font-family: 'Orbitron', sans-serif;
+  }
+
   img {
     width: 4vw;
     height: 9vh;
@@ -62,7 +68,7 @@
     width: 15vw !important;
   }
 
-  .title {
+  .form-title {
     width: 20vw !important;
   }
 

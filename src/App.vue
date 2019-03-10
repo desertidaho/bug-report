@@ -11,7 +11,7 @@
 
 <style>
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
@@ -27,7 +27,7 @@
 
   .copyright {
     position: absolute;
-    bottom: 0;
-    margin-left: 43%;
+    bottom: 1rem;
+    margin-left: 44%;
   }
 </style>
