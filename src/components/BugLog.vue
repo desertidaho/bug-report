@@ -5,7 +5,7 @@
         <button class="btn btn-sm btn-outline-dark shadow mx-3" @click="sortStatus">Sort Status</button>
         <button class="btn btn-sm btn-outline-dark shadow mx-3 mt-4" @click="sortDate">Sort Date</button>
       </div>
-      <div class="col-10 mt-3 px-0">
+      <div class="col-10 mt-2 px-0">
         <table class="table table-hover table-bordered shadow-lg text-center">
           <thead class="thead-dark">
             <tr>
@@ -16,7 +16,7 @@
               <th id="closed">When Closed</th>
             </tr>
           </thead>
-          <tbody v-for="log in allLogs" :key="log.id" :class="log.closed ? 'table-secondary' :'table-success'">
+          <tbody v-for="log in allLogs" :key="log.id" :class="log.closed ? 'table-warning' :'table-primary'">
             <tr @click="setActive(log); $router.push({name: 'bugDetails', params:{id: log._id}})">
               <td>{{log.creator}}</td>
               <td>{{log.title}}</td>

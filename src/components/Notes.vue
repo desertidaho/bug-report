@@ -2,13 +2,19 @@
   <div>
     <div class="Notes col-4 offset-4" v-for="note in allNotes" :key="note">
       <div class="card mb-4 shadow">
-        <div class="card-body bg-warning">
+        <div class="card-body"
+          :class="note.flagged == 'pending' ? 'bg-warning' : note.flagged == 'completed' ? 'bg-success' : 'bg-secondary'">
           <h6 class="card-subtitle"><b>Created by:</b> {{note.creator}}</h6>
           <h6 class="card-subtitle"><b>Comments:</b> {{note.content}}</h6>
           <h6 class="card-subtitle"><b>Note created:</b> {{note.createdAt | formatTime}}</h6>
           <h6 class="card-subtitle"><b>Last activity:</b> {{note.updatedAt | formatTime}}</h6>
-          <h6 class="card-subtitle"><b>Status:</b> {{note.flagged}}</h6>
-          <button class="btn btn-sm btn-outline-dark shadow mt-2 delete-btn"
+          <h6 v-show="note.flagged == 'pending'" class="card-subtitle"><b>Status:</b> Pending</h6>
+          <h6 v-show="note.flagged == 'completed'" class="card-subtitle"><b>Status:</b> Completed</h6>
+          <h6 v-show="note.flagged == 'rejected'" class="card-subtitle"><b>Status:</b> Rejected</h6>
+          <h6 v-show="note.flagged == 'pending'"><b>Change Status:</b> <a href=""
+              @click="changeStatus(`{${note._id}, flagged: 'completed'}`)" class="ml-1">Completed, </a> <a href=""
+              @click="changeStatus(`{${note._id}, flagged: 'rejected'}`)" class="ml-1">Rejected</a></h6>
+          <button class="btn btn-sm btn-outline-dark shadow delete-btn"
             @click="deleteNote(`${note._id}`)">Delete</button>
         </div>
       </div>
@@ -37,6 +43,9 @@
     methods: {
       deleteNote(noteId) {
         this.$store.dispatch('deleteNote', noteId)
+      },
+      changeStatus(payload) {
+        this.$store.dispatch('editNote', payload)
       }
     },
     components: {},

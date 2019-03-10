@@ -91,6 +91,16 @@ export default new Vuex.Store({
         .then(res => {
           this.dispatch('getAllNotes')
         })
+    },
+    editNote({ commit, dispatch }, noteId) {
+      debugger
+      let postId = this.state.activeLog._id
+      _sandbox.put(`${postId}/notes/${noteId}`)
+        .then(res => {
+
+          console.log(res.data.results)
+          //this.dispatch('getAllNotes')
+        })
     }
 
   }

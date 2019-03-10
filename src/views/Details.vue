@@ -1,7 +1,8 @@
 <template>
   <div class="details container-fluid">
     <div class="row">
-      <h1 class="title mt-4 col-12 text-center">Technical Bug Details</h1>
+      <h1 class="title mt-4 col-12 text-center">Technical Bug Details <img class="mb-2"
+          src="../../public/img/spy-bug.png" alt=""></h1>
     </div>
     <div class="row my-5">
       <div class="col-10 offset-1">
@@ -17,7 +18,7 @@
               <th id="status">Status</th>
             </tr>
           </thead>
-          <tbody :class="log.closed ? 'table-secondary' :'table-success'">
+          <tbody :class="log.closed ? 'table-warning' :'table-primary'">
             <tr>
               <td>{{log.creator}}</td>
               <td>{{log.title}}</td>
@@ -34,7 +35,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-10 offset-1 mt-4" v-show="!log.closed">
+      <div class="col-8 offset-2 mt-2" v-show="!log.closed">
         <h5 class="text-center mt-3">Creat a note for this bug</h5>
         <form @submit.prevent="addNote" class="mb-5">
           <div class="form-goup my-4 col-12 d-flex justify-content-center">
@@ -117,6 +118,11 @@
 </script>
 
 <style scoped>
+  img {
+    width: 4vw;
+    height: 9vh;
+  }
+
   .close-btn {
     font-size: 0.7rem;
   }
@@ -149,6 +155,11 @@
 
   #status {
     width: 9vw;
+  }
+
+  input[type="text"].form-control::-webkit-input-placeholder {
+    font-weight: 500;
+    color: rgb(66, 123, 247);
   }
 
   input {
