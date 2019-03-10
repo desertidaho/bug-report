@@ -47,7 +47,7 @@
     methods: {
       addLog() {
         this.$store.dispatch('addLog', this.newLog)
-        this.form.reset()
+        //this.form.reset()
       }
     }
   }
@@ -55,7 +55,7 @@
 
 <style scoped>
   .title {
-    text-shadow: 0.3px 0.3px rgb(245, 142, 24);
+    text-shadow: 0.3px 0.3px rgb(243, 132, 5);
     font-family: 'Orbitron', sans-serif;
   }
 

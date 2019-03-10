@@ -19,9 +19,6 @@
         </div>
       </div>
     </div>
-    <!-- <select v-model="newNote.flagged" class="ml-2">
-              <option :value="flagged" v-for="flagged in flags" :key="flagged">{{flagged}}</option>
-    </select>-->
   </div>
 </template>
 
@@ -54,7 +51,6 @@
         return Moment(String(date)).format('MM/DD/YYYY, LT')
       }
     }
-
   };
 </script>
 

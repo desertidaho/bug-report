@@ -70,7 +70,6 @@
         return Moment(String(date)).format('MM/DD/YYYY, LT')
       }
     }
-
   };
 </script>
 

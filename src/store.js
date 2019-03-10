@@ -13,7 +13,6 @@ export default new Vuex.Store({
     logs: [],
     activeLog: {},
     allNotes: []
-
   },
   mutations: {
     setLogs(state, data) {
@@ -25,7 +24,6 @@ export default new Vuex.Store({
     addNote(state, data) {
       state.allNotes = data
     }
-
   },
   actions: {
     //creates new bug log report
@@ -92,16 +90,13 @@ export default new Vuex.Store({
           this.dispatch('getAllNotes')
         })
     },
+    //not working properly, server side issue??
     editNote({ commit, dispatch }, noteId) {
-      debugger
       let postId = this.state.activeLog._id
       _sandbox.put(`${postId}/notes/${noteId}`)
         .then(res => {
-
-          console.log(res.data.results)
-          //this.dispatch('getAllNotes')
+          this.dispatch('getAllNotes')
         })
     }
-
   }
 })

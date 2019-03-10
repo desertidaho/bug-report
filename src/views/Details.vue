@@ -86,8 +86,8 @@
       },
       log() {
         if (!this.$store.state.activeLog._id) {
-          let active = this.$route.params.id
-          return this.$store.state.logs.find(i => i._id == active);
+          let id = this.$route.params.id
+          return this.$store.state.logs.find(i => i._id == id);
         } else {
           return this.$store.state.activeLog;
         }
@@ -96,7 +96,7 @@
     methods: {
       addNote() {
         this.$store.dispatch('newNote', this.newNote);
-        this.$data.newNote.reset()
+        //this.$data.newNote.reset()
       },
       close() {
         this.$store.dispatch('close', this.$store.state.activeLog._id)
@@ -110,14 +110,12 @@
         return Moment(String(date)).format('MM/DD/YYYY, LT')
       }
     }
-
-
   };
 </script>
 
 <style scoped>
   .title {
-    text-shadow: 0.3px 0.3px rgb(245, 142, 24);
+    text-shadow: 0.3px 0.3px rgb(243, 132, 5);
     font-family: 'Orbitron', sans-serif;
   }
 
