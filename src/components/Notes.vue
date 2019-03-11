@@ -12,8 +12,8 @@
           <h6 v-show="note.flagged == 'completed'" class="card-subtitle"><b>Status:</b> Completed</h6>
           <h6 v-show="note.flagged == 'rejected'" class="card-subtitle"><b>Status:</b> Rejected</h6>
           <h6 v-show="note.flagged == 'pending'"><b>Change Status:</b> <a href=""
-              @click="changeStatus(`{${note._id}, flagged: 'completed'}`)" class="ml-1">Completed, </a> <a href=""
-              @click="changeStatus(`{${note._id}, flagged: 'rejected'}`)" class="ml-1">Rejected</a></h6>
+              @click="changeStatus(note._id, 'completed')" class="ml-1">Completed, </a> <a href=""
+              @click="changeStatus(note._id, 'rejected')" class="ml-1">Rejected</a></h6>
           <button class="btn btn-sm btn-outline-dark shadow delete-btn"
             @click="deleteNote(`${note._id}`)">Delete</button>
         </div>
@@ -27,7 +27,9 @@
 
   export default {
     name: "Notes",
-    mounted() { },
+    mounted() {
+
+    },
     props: [],
     data() {
       return {};
@@ -41,9 +43,8 @@
       deleteNote(noteId) {
         this.$store.dispatch('deleteNote', noteId)
       },
-      //not working properly?? Sending correct payload. Server issue?
-      changeStatus(payload) {
-        this.$store.dispatch('editNote', payload)
+      changeStatus(noteId, payload) {
+        this.$store.dispatch('editNote', { noteId, payload })
       }
     },
     components: {},

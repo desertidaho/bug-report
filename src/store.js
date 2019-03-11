@@ -37,7 +37,7 @@ export default new Vuex.Store({
         })
     },
     //get all bug reports
-    getAllLogs({ commit, dispatch }, payload) {
+    getAllLogs({ commit, dispatch }) {
       _sandbox.get('')
         .then(res => {
           commit('setLogs', res.data.results)
@@ -50,8 +50,8 @@ export default new Vuex.Store({
     setActive({ commit, dispatch }, log) {
       commit('setActiveLog', log)
     },
-    getActiveLog({ commit, dispatch }, payload) {
-      _sandbox.get(':id')
+    getActiveLog({ commit, dispatch }, id) {
+      _sandbox.get(`${id}`)
         .then(res => {
           commit('setActiveLog', res.data.results)
         })
@@ -90,10 +90,9 @@ export default new Vuex.Store({
           this.dispatch('getAllNotes')
         })
     },
-    //not working properly, server side issue??
-    editNote({ commit, dispatch }, noteId) {
+    editNote({ commit, dispatch }, { noteId, payload }) {
       let postId = this.state.activeLog._id
-      _sandbox.put(`${postId}/notes/${noteId}`)
+      _sandbox.put(`${postId}/notes/${noteId}`, { "flagged": payload })
         .then(res => {
           this.dispatch('getAllNotes')
         })

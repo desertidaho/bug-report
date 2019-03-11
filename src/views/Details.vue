@@ -89,6 +89,8 @@
       log() {
         if (!this.$store.state.activeLog._id) {
           let id = this.$route.params.id
+          this.$store.dispatch('getActiveLog', id)
+          this.$store.dispatch('getAllNotes')
           return this.$store.state.logs.find(log => log._id == id);
         } else {
           return this.$store.state.activeLog;

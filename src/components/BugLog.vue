@@ -52,7 +52,7 @@
     },
     methods: {
       setActive(log) {
-        this.$store.dispatch("setActive", log);
+        this.$store.dispatch('setActive', log);
       },
       sortName() {
         let logs = this.$store.state.logs
