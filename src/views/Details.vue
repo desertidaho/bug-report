@@ -63,7 +63,11 @@
       if (this.$store.state.logs.length == 0) {
         this.$store.dispatch('getAllLogs')
       }
-      this.$store.state.activeLog;
+      if (!this.$store.state.activeLog._id) {
+        let id = this.$route.params.id
+        this.$store.dispatch('getActiveLog', id)
+        this.$store.dispatch('getAllNotesAfterRefresh', id);
+      }
       this.$store.dispatch('getAllNotes');
     },
     props: [],
@@ -102,7 +106,7 @@
         this.$store.dispatch('newNote', this.newNote);
       },
       close() {
-        this.$store.dispatch('close', this.$store.state.activeLog._id)
+        this.$store.dispatch('closeLog', this.$store.state.activeLog._id)
       }
     },
     components: {

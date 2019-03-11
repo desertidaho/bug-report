@@ -26,7 +26,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    //creates new bug log report
     addLog({ commit, dispatch }, payload) {
       _sandbox.post('', payload)
         .then(res => {
@@ -36,7 +35,6 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    //get all bug reports
     getAllLogs({ commit, dispatch }) {
       _sandbox.get('')
         .then(res => {
@@ -46,7 +44,6 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    //set active log
     setActive({ commit, dispatch }, log) {
       commit('setActiveLog', log)
     },
@@ -73,8 +70,13 @@ export default new Vuex.Store({
           commit('addNote', res.data.results)
         })
     },
-    //close a bug report
-    close({ commit, dispatch }, id) {
+    getAllNotesAfterRefresh({ commit, dispatch }, id) {
+      _sandbox.get(`${id}/notes`)
+        .then(res => {
+          commit('addNote', res.data.results)
+        })
+    },
+    closeLog({ commit, dispatch }, id) {
       _sandbox.delete(`${id}`)
         .then(res => {
           commit('setActiveLog', res.data.results)
