@@ -65,7 +65,6 @@
       }
       if (!this.$store.state.activeLog._id) {
         let id = this.$route.params.id
-        this.$store.dispatch('getActiveLog', id)
         this.$store.dispatch('getAllNotesAfterRefresh', id);
       }
       this.$store.dispatch('getAllNotes');
@@ -93,8 +92,6 @@
       log() {
         if (!this.$store.state.activeLog._id) {
           let id = this.$route.params.id
-          this.$store.dispatch('getActiveLog', id)
-          this.$store.dispatch('getAllNotes')
           return this.$store.state.logs.find(log => log._id == id);
         } else {
           return this.$store.state.activeLog;
@@ -106,7 +103,10 @@
         this.$store.dispatch('newNote', this.newNote);
       },
       close() {
-        this.$store.dispatch('closeLog', this.$store.state.activeLog._id)
+        let message = confirm("Are you sure you want to close bug report? Details will still be displayed but you will not be able to add or modify notes.");
+        if (message == true) {
+          this.$store.dispatch('closeLog', this.$store.state.activeLog._id)
+        }
       }
     },
     components: {
@@ -166,7 +166,7 @@
 
   input[type="text"].form-control::-webkit-input-placeholder {
     font-weight: 500;
-    color: #ffc107;
+    color: rgb(66, 123, 247);
   }
 
   input {
