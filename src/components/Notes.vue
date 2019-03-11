@@ -41,7 +41,10 @@
     },
     methods: {
       deleteNote(noteId) {
-        this.$store.dispatch('deleteNote', noteId)
+        let message = confirm("Are you sure you want to delete note?");
+        if (message == true) {
+          this.$store.dispatch('deleteNote', noteId)
+        }
       },
       changeStatus(noteId, payload) {
         this.$store.dispatch('editNote', { noteId, payload })
