@@ -6,6 +6,7 @@
         <button class="btn btn-sm btn-outline-secondary shadow ml-2" @click="sortStatus">Sort Status</button>
         <button class="btn btn-sm btn-outline-secondary shadow ml-2" @click="sortDate">Sort Date</button>
         <h6 class="ml-3 mt-2">Total reports: {{allLogs.length}}</h6>
+        <h6 class="ml-3 mt-2">Active: {{numbers.active}} <span class="ml-2"></span>Closed: {{numbers.closed}}</h6>
       </div>
     </div>
     <div class="row">
@@ -42,12 +43,29 @@
     name: "BugLog",
     props: [],
     data() {
-      return {};
+      return {}
     },
     computed: {
       allLogs() {
         this.$emit('clearLogInputFields')
         return this.$store.state.logs;
+      },
+      numbers() {
+        let active = 'active'
+        let closed = 'closed'
+        let answer = {}
+        answer[active] = 0
+        answer[closed] = 0
+        let logs = this.$store.state.logs;
+        for (let i = 0; i < logs.length; i++) {
+          let log = logs[i]
+          if (!log.closed) {
+            answer[active]++
+          } else {
+            answer[closed]++
+          }
+        }
+        return answer
       }
     },
     methods: {
